@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Events</title>
+</head>
+
+<body>
+    <h1>Please add comment</h1>
+    <div id="comment-box">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis quasi tempora alias suscipit, voluptate
+            dolorum nostrum animi. Repellat praesentium doloremque enim culpa aut, possimus, eum neque eaque laboriosam
+            natus officia repellendus ut distinctio quaerat sed adipisci ipsum perferendis quod! Quibusdam commodi, ut
+            quisquam iusto quia maxime provident itaque corporis. Magni.</p>
+        <p>Sunt quibusdam reiciendis debitis deserunt doloribus, vitae saepe at, nisi facilis magni numquam. Unde ipsa
+            cumque soluta tempora hic dolorem fuga modi ipsam, quam earum perferendis. Omnis cupiditate, beatae nam enim
+            aperiam quae reprehenderit error animi natus ipsum aspernatur a. Distinctio nihil consequuntur inventore
+            enim explicabo tenetur pariatur quibusdam quis.</p>
+        <p>Qui dolore eos dolores, delectus esse non! Laudantium corrupti qui sapiente deleniti vero! Ipsam ea
+            necessitatibus adipisci repudiandae! Aperiam minus error placeat odit debitis quis soluta neque accusantium
+            dolor, quas minima aliquam, maiores esse voluptatem voluptate delectus cum officia, fuga voluptatibus
+            voluptates nobis! Repudiandae officia corrupti incidunt error libero. Laboriosam?</p>
+    </div>
+    <div>
+        <textarea name="" id="new-comment" cols="60" rows="50"></textarea>
+        <button id="btn-post">Post</button>
+    </div>
+
+    <button onclick="console.log(7)">Click Me</button>
+    <button onclick="document.body.style.backgroundColor='yellow'">Make Yellow</button>
+    <button onclick="makeRed()">Make Red</button>
+    <button id="make-blue">Make Blue</button>
+    <button id="make-pink">Make Pink</button>
+    <button id="make-goldenrod">Make Golden Rod</button>
+    <br>
+    <h3 id="handler-status"> Default Text</h3>
+    <button onclick="handleOnClick()">Add onclick function</button>
+    <button id="event-listener">EventListener</button>
+    <br>
+    <p id="input-text">Default Text</p>
+    <input type="text" name="" id="input-field">
+    <button id="btn-update">Update</button>
+    <br>
+    <h1 id="secret-info">My secret info</h1>
+    <input id="delete-confirm" type="text">
+    <button id="btn-delete" disabled>Delete</button>
+
+    <script src="events.js"></script>
+    <script>
+        document.getElementById('delete-confirm').addEventListener('keyup', function (event) {
+            const text = event.target.value;
+            const deleteButton = document.getElementById('btn-delete');
+            if (text === 'delete') {
+                deleteButton.removeAttribute('disabled');
+            }
+            else {
+                deleteButton.setAttribute('disabled', true);
+            }
+        })
+        document.getElementById('btn-delete').addEventListener('click', function () {
+            const secret = document.getElementById('secret-info');
+            secret.style.display = 'none';
+        })
+
+        document.getElementById('btn-post').addEventListener('click', function () {
+            const commentBox = document.getElementById('new-comment');
+            const newComment = commentBox.value;
+            const commentContainer = document.getElementById('comment-box');
+            const p = document.createElement('p');
+            p.innerText = newComment;
+            commentContainer.appendChild(p);
+            commentBox.value = '';
+        })
+        function handleOnClick() {
+            const handlerStatus = document.getElementById('handler-status');
+            handlerStatus.innerText = 'Handled by function';
+        }
+
+        document.getElementById('event-listener').addEventListener('click', function () {
+            const handlerStatus = document.getElementById('handler-status');
+            handlerStatus.innerText = 'Handled by event listener';
+        })
+
+        document.getElementById('btn-update').addEventListener('click', function () {
+            const inputField = document.getElementById('input-field');
+            const inputText = inputField.value;
+            const p = document.getElementById('input-text');
+            p.innerText = inputText;
+            inputField.value = '';
+        })
+
+        const makeBlueButton = document.getElementById('make-blue');
+        makeBlueButton.onclick = makeBlue;
+
+        function makeBlue() {
+            document.body.style.backgroundColor = 'blue'
+        }
+
+        function makeRed() {
+            document.body.style.backgroundColor = 'red';
+        }
+
+        const pinkButton = document.getElementById('make-pink');
+        pinkButton.addEventListener('click', makePink);
+
+        function makePink() {
+            document.body.style.backgroundColor = 'pink';
+        }
+
+        document.getElementById('make-goldenrod').addEventListener('click', function () {
+            document.body.style.backgroundColor = 'goldenrod';
+        }) 
+    </script>
+</body>
+
+</html>
